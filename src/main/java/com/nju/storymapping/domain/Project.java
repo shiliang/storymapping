@@ -21,11 +21,11 @@ public class Project {
     @Column(name = "endDate")
     private Date endDate;
 
+    @Column(name = "descri")
+    private String describe;
+
     @ManyToOne(fetch = FetchType.LAZY)
     private Project fatherProject;
-
-    @Column(name = "desc")
-    private String desc;
 
 
     public Long getId() {
@@ -68,11 +68,11 @@ public class Project {
         this.fatherProject = fatherProject;
     }
 
-    public String getDesc() {
-        return desc;
+    public String getDescribe() {
+        return describe;
     }
 
-    public void setDesc(String desc) {
-        this.desc = desc;
+    public void setDescribe(String describe) {
+        this.describe = describe;
     }
 }
