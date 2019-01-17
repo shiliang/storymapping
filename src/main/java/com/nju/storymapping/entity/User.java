@@ -20,7 +20,6 @@ public class User {
 
     private String username;
     private String password;
-    private String hashPass;
 
 
     public long getId() {
@@ -47,11 +46,5 @@ public class User {
         this.password = password;
     }
 
-    public String getHashPass() {
-        return hashPass;
-    }
 
-    public void setHashPass(String hashPass) {
-        this.hashPass = hashPass;
-    }
 }

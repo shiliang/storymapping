@@ -5,8 +5,25 @@ package com.nju.storymapping.mapper;/*
  * @create:2019-01-12 13:42
  * */
 
+import com.nju.storymapping.entity.User;
 import org.apache.ibatis.annotations.Insert;
+import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Select;
+import org.springframework.stereotype.Repository;
 
+@Repository
+@Mapper
 public interface UserMapper {
-    //@Insert("INSERT INTO ")
+
+    @Insert("INSERT INTO user(username,password) VALUES(#{username}, #{password})")
+    int addUser(User user);
+
+    @Select("SELECT * FROM user WHERE id = #{id}")
+    User getUserById(int id);
+
+    @Select("SELECT * FROM user WHERE username = #{username}")
+    User getUserByName(String username);
+
+
+
 }
