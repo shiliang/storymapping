@@ -10,9 +10,7 @@ import com.nju.storymapping.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.DigestUtils;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
 
@@ -26,11 +24,15 @@ public class LoginController {
         return "index";
     }
 
+    @CrossOrigin(origins = "http://localhost:8080", allowedHeaders = "Access-Control-Allow-Origin")
     @RequestMapping(value = "/login", method = RequestMethod.POST)
+    @ResponseBody
     public String loginHandle(@RequestParam(value = "username") String userName,
                         @RequestParam(value = "password") String passWord) {
+        HashMap<String, Object> map = new HashMap<String, Object>();
+        map.put("msg", "用户名已被注册");
 
-        return "hah";
+        return "succsess";
 
     }
 
