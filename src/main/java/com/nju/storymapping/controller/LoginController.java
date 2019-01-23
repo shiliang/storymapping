@@ -27,16 +27,29 @@ public class LoginController {
     @CrossOrigin(origins = "http://localhost:8080", allowedHeaders = "Access-Control-Allow-Origin")
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     @ResponseBody
-    public String loginHandle(@RequestParam(value = "username") String userName,
+    public HashMap<String, Object> loginHandle(@RequestParam(value = "username") String userName,
                         @RequestParam(value = "password") String passWord) {
         HashMap<String, Object> map = new HashMap<String, Object>();
-        map.put("msg", "用户名已被注册");
+        User user = userService.getUserByName(userName);
+        String hashPass = DigestUtils.md5DigestAsHex(passWord.getBytes());
 
-        return "succsess";
+        if (user.getUsername().isEmpty()) {
+            map.put("error", "用户名不存在");
+            return map;
+        }
+        else if (!user.getPassword().equals(hashPass)) {
+            map.put("error", "密码错误");
+            return map;
+        } else {
+            map.put("success",user.getId());
+            return map;
+        }
+
 
     }
 
     @RequestMapping(value = "/register", method = RequestMethod.POST)
+    @ResponseBody
     public HashMap<String, Object> registerHandle(@RequestParam(value = "username") String userName,
                                             @RequestParam(value = "password") String passWord){
         HashMap<String, Object> map = new HashMap<String, Object>();
@@ -53,8 +66,17 @@ public class LoginController {
         user.setPassword(hashPass);
         int userId = userService.addUser(user);
         String id = Integer.toString(userId);
+        //返回给前台跳转到个人主页
         map.put("id",id);
         return map;
 
+    }
+
+    //跳转个人主页返回主页信息
+    @RequestMapping(value = "/{id}/dashboard", method = RequestMethod.GET)
+    @ResponseBody
+    public HashMap<String, Object> mainPage(@PathVariable String id) {
+        HashMap<String, Object> map = new HashMap<String, Object>();
+        return map;
     }
 }
