@@ -5,9 +5,6 @@ package com.nju.storymapping.entity;/*
  * @create:2019-01-12 12:42
  * */
 
-import com.sun.javafx.beans.IDProperty;
-import org.springframework.boot.autoconfigure.domain.EntityScan;
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
