@@ -30,7 +30,6 @@ public class LoginController {
     public HashMap<String, Object> loginHandle(@RequestParam(value = "username") String userName,
                         @RequestParam(value = "password") String passWord) {
         HashMap<String, Object> map = new HashMap<String, Object>();
-<<<<<<< Updated upstream
         User user = userService.getUserByName(userName);
         String hashPass = DigestUtils.md5DigestAsHex(passWord.getBytes());
 
@@ -43,12 +42,9 @@ public class LoginController {
             return map;
         } else {
             map.put("success",user.getId());
+            map.put("token", "admin");
             return map;
         }
-
-=======
-        map.put("token", "admin");
-        return map;
 
     }
     @RequestMapping(value = "/userinfo", method = RequestMethod.GET)
@@ -64,7 +60,6 @@ public class LoginController {
         }
         return userInfo;
     }
->>>>>>> Stashed changes
 
     @RequestMapping(value = "logout", method = RequestMethod.POST)
     public String logOut() {
