@@ -1,10 +1,11 @@
 package com.nju.storymapping.controller;
 
-import com.nju.storymapping.domain.Project;
+import com.nju.storymapping.entity.Project;
 import com.nju.storymapping.respository.ProjectRepository;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+import java.util.Optional;
 
 @RestController
 public class ProjectController {
@@ -15,14 +16,22 @@ public class ProjectController {
         this.projectRepository = projectRepository;
     }
 
-    @PostMapping("/project")
+    @PostMapping("/addproject")
     public String addProject(@RequestBody Project project) {
         //保存计划
-       Project pro =  projectRepository.save(project);
+       projectRepository.save(project);
+       return null;
+    }
 
-       return "hello project";
-//               ResponseEntity.created(new URI("/api/project" + pro.getId()))
-//               .headers().body(pro);
+    @PostMapping("/projectlist")
+    public List<Project> projectList() {
+        List<Project> projects = projectRepository.findAll();
+        return projects;
+    }
 
+    @GetMapping("/viewproject")
+    public Project viewProject(@RequestParam long id) {
+        Optional<Project> pro = projectRepository.findById(id);
+        return pro.get();
     }
 }

@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
 
-@Controller
+@RestController
 public class LoginController {
     @Autowired
     UserService userService;
@@ -24,12 +24,13 @@ public class LoginController {
         return "index";
     }
 
-    @CrossOrigin(origins = "http://localhost:8080", allowedHeaders = "Access-Control-Allow-Origin")
+//    @CrossOrigin(origins = "http://localhost:9528", allowedHeaders = "Access-Control-Allow-Origin")
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     @ResponseBody
     public HashMap<String, Object> loginHandle(@RequestParam(value = "username") String userName,
                         @RequestParam(value = "password") String passWord) {
         HashMap<String, Object> map = new HashMap<String, Object>();
+<<<<<<< Updated upstream
         User user = userService.getUserByName(userName);
         String hashPass = DigestUtils.md5DigestAsHex(passWord.getBytes());
 
@@ -45,7 +46,29 @@ public class LoginController {
             return map;
         }
 
+=======
+        map.put("token", "admin");
+        return map;
 
+    }
+    @RequestMapping(value = "/userinfo", method = RequestMethod.GET)
+    public HashMap<String, Object> getInfo(@RequestParam(value = "token") String token) {
+        HashMap<String, Object> userInfo = new HashMap<String, Object>();
+        String[] role = new String[1];
+        if (token.equals("admin")) {
+            role[0] = "admin";
+            userInfo.put("roles", role);
+            userInfo.put("introduction","我是超级管理员");
+            userInfo.put("avatar","https://wpimg.wallstcn.com/f778738c-e4f8-4870-b634-56703b4acafe.gif");
+            userInfo.put("name","Super Admin");
+        }
+        return userInfo;
+    }
+>>>>>>> Stashed changes
+
+    @RequestMapping(value = "logout", method = RequestMethod.POST)
+    public String logOut() {
+        return "logout";
     }
 
     @RequestMapping(value = "/register", method = RequestMethod.POST)

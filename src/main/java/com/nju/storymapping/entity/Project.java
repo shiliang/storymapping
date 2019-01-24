@@ -1,55 +1,92 @@
-package com.nju.storymapping.entity;/*
- * @program:com.nju.storymapping.entity
- * @description:项目详情
- * @author:shiliang
- * @create:2019-01-23 20:10
- * */
+package com.nju.storymapping.entity;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+
+import javax.persistence.*;
+import java.util.Date;
 
 @Entity
+@Table(name = "project")
 public class Project {
-    @Id
-    @GeneratedValue
-    private long id;
-    //项目名称
-    private String project_name;
-    //项目标识
-    private String project_identity;
-    //项目描述
-    private String project_description;
 
-    public long getId() {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @Column(name = "title")
+    private String title;
+
+    @Column(name = "beginDate")
+    private Date beginDate;
+
+    @Column(name = "endDate")
+    private Date endDate;
+
+    @Column(name = "descri")
+    private String describe;
+
+    @Column(name = "delivery")
+    private Boolean delivery;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    private Project fatherProject;
+
+    public Boolean getDelivery() {
+        return delivery;
+    }
+
+    public void setDelivery(Boolean delivery) {
+        this.delivery = delivery;
+    }
+
+    public void setFatherProject(Project fatherProject) {
+        this.fatherProject = fatherProject;
+    }
+
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
-    public String getProject_name() {
-        return project_name;
+    public String getTitle() {
+        return title;
     }
 
-    public void setProject_name(String project_name) {
-        this.project_name = project_name;
+    public void setTitle(String title) {
+        this.title = title;
     }
 
-    public String getProject_identity() {
-        return project_identity;
+    public Date getBeginDate() {
+        return beginDate;
     }
 
-    public void setProject_identity(String project_identity) {
-        this.project_identity = project_identity;
+    public void setBeginDate(Date beginDate) {
+        this.beginDate = beginDate;
     }
 
-    public String getProject_description() {
-        return project_description;
+    public Date getEndDate() {
+        return endDate;
     }
 
-    public void setProject_description(String project_description) {
-        this.project_description = project_description;
+    public void setEndDate(Date endDate) {
+        this.endDate = endDate;
+    }
+
+    public Project getFatherProject() {
+        return fatherProject;
+    }
+
+    public void setFatherProjectId(Project fatherProject) {
+        this.fatherProject = fatherProject;
+    }
+
+    public String getDescribe() {
+        return describe;
+    }
+
+    public void setDescribe(String describe) {
+        this.describe = describe;
     }
 }

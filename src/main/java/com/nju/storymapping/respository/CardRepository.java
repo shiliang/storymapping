@@ -1,13 +1,11 @@
 package com.nju.storymapping.respository;
 
-
-import com.nju.storymapping.entity.Project;
+import com.nju.storymapping.entity.Card;
+import com.nju.storymapping.entity.UserInfo;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-@SuppressWarnings("unused")
 @Repository
-public interface ProjectRepository extends JpaRepository<Project, Long> {
-
+public interface CardRepository extends JpaRepository<Card,Long> {
 
 }

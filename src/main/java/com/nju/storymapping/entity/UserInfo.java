@@ -1,4 +1,4 @@
-package com.nju.storymapping.domain;
+package com.nju.storymapping.entity;
 
 import javax.persistence.*;
 
