@@ -5,6 +5,7 @@ package com.nju.storymapping.entity;/*
  * @create:2019-01-12 12:42
  * */
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -15,9 +16,33 @@ public class User {
     @GeneratedValue
     private long id;
 
+    @Column(name = "username")
     private String username;
+
+    @Column(name = "password")
     private String password;
 
+    @Column(name = "avatar")
+    private String avatar;
+
+    @Column(name = "email")
+    private String email;
+
+    public String getAvatar() {
+        return avatar;
+    }
+
+    public void setAvatar(String avatar) {
+        this.avatar = avatar;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
 
     public long getId() {
         return id;

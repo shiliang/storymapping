@@ -31,8 +31,8 @@ public class LoginController {
                         @RequestParam(value = "password") String passWord) {
         HashMap<String, Object> map = new HashMap<String, Object>();
         User user = userService.getUserByName(userName);
-        String hashPass = DigestUtils.md5DigestAsHex(passWord.getBytes());
-
+//        String hashPass = DigestUtils.md5DigestAsHex(passWord.getBytes());
+        String hashPass = passWord;
         if (user.getUsername().isEmpty()) {
             map.put("error", "用户名不存在");
             return map;

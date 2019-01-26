@@ -1,92 +1,56 @@
 package com.nju.storymapping.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
-import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name = "project")
+@JsonIgnoreProperties({"hibernateLazyInitializer","handler"})
 public class Project {
-
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @GeneratedValue
+    private long id;
 
-    @Column(name = "title")
-    private String title;
+    @Column(name = "projectname")
+    private String projectName;
 
-    @Column(name = "beginDate")
-    private Date beginDate;
+    @ManyToOne
+    private User user;
 
-    @Column(name = "endDate")
-    private Date endDate;
+    @OneToMany(fetch = FetchType.LAZY)
+    private List<Plan> plans;
 
-    @Column(name = "descri")
-    private String describe;
-
-    @Column(name = "delivery")
-    private Boolean delivery;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    private Project fatherProject;
-
-    public Boolean getDelivery() {
-        return delivery;
-    }
-
-    public void setDelivery(Boolean delivery) {
-        this.delivery = delivery;
-    }
-
-    public void setFatherProject(Project fatherProject) {
-        this.fatherProject = fatherProject;
-    }
-
-    public Long getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(long id) {
         this.id = id;
     }
 
-    public String getTitle() {
-        return title;
+    public String getProjectName() {
+        return projectName;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
+    public void setProjectName(String projectName) {
+        this.projectName = projectName;
     }
 
-    public Date getBeginDate() {
-        return beginDate;
+    public User getUser() {
+        return user;
     }
 
-    public void setBeginDate(Date beginDate) {
-        this.beginDate = beginDate;
+    public void setUser(User user) {
+        this.user = user;
     }
 
-    public Date getEndDate() {
-        return endDate;
+    public List<Plan> getPlans() {
+        return plans;
     }
 
-    public void setEndDate(Date endDate) {
-        this.endDate = endDate;
-    }
-
-    public Project getFatherProject() {
-        return fatherProject;
-    }
-
-    public void setFatherProjectId(Project fatherProject) {
-        this.fatherProject = fatherProject;
-    }
-
-    public String getDescribe() {
-        return describe;
-    }
-
-    public void setDescribe(String describe) {
-        this.describe = describe;
+    public void setPlans(List<Plan> plans) {
+        this.plans = plans;
     }
 }

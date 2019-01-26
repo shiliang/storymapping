@@ -1,10 +1,9 @@
 package com.nju.storymapping.respository;
 
-import com.nju.storymapping.entity.Card;
+import com.nju.storymapping.entity.Plan;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface CardRepository extends JpaRepository<Card,Long> {
-
+public interface PlanRepository extends JpaRepository<Plan, Long> {
 }

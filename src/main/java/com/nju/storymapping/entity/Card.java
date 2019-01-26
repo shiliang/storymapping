@@ -77,7 +77,7 @@ public class Card {
     private Date date;  //日期
 
     @ManyToOne
-    private Project belongProject; //所属计划
+    private Plan belongPlan; //所属计划
 
     public Date getDate() {
         return date;
@@ -127,12 +127,12 @@ public class Card {
         this.personInCharge = personInCharge;
     }
 
-    public Project getBelongProject() {
-        return belongProject;
+    public Plan getBelongPlan() {
+        return belongPlan;
     }
 
-    public void setBelongProject(Project belongProject) {
-        this.belongProject = belongProject;
+    public void setBelongPlan(Plan belongPlan) {
+        this.belongPlan = belongPlan;
     }
 //>>>>>>> Stashed changes
 }
