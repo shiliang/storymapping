@@ -22,6 +22,12 @@ public class Project {
     @OneToMany(fetch = FetchType.LAZY)
     private List<Plan> plans;
 
+    //项目标识
+    private String projecttag;
+
+    //项目描述
+    private String projectdesc;
+
     public long getId() {
         return id;
     }
@@ -52,5 +58,21 @@ public class Project {
 
     public void setPlans(List<Plan> plans) {
         this.plans = plans;
+    }
+
+    public String getProjecttag() {
+        return projecttag;
+    }
+
+    public void setProjecttag(String projecttag) {
+        this.projecttag = projecttag;
+    }
+
+    public String getProjectdesc() {
+        return projectdesc;
+    }
+
+    public void setProjectdesc(String projectdesc) {
+        this.projectdesc = projectdesc;
     }
 }
