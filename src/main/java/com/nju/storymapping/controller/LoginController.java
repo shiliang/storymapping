@@ -43,6 +43,7 @@ public class LoginController {
         } else {
             map.put("success",user.getId());
             map.put("token", "admin");
+            map.put("project_id", "1");
             return map;
         }
 

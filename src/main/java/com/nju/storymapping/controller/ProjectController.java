@@ -44,4 +44,10 @@ public class ProjectController {
         Optional<Project> pro = projectRepository.findById(id);
         return pro.get();
     }
+
+    @GetMapping("/projectdetail")
+    public Project getProjectDetail(@RequestParam long id) {
+        Optional<Project> pro = projectRepository.findById(id);
+        return pro.get();
+    }
 }

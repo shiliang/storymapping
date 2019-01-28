@@ -70,8 +70,11 @@ public class Card {
     @Column(name = "type")
     private String type;
 
-    @Column(name = "personInCharge")
-    private String personInCharge;  //负责人
+    @Column(name = "personInChargeId")
+    private long personInChargeId;  //负责人
+
+    @Column(name = "personCreateId")
+    private long personCreateId;   //创建人
 
     @Column(name = "date")
     private Date date;  //日期
@@ -119,14 +122,6 @@ public class Card {
         this.status = status;
     }
 
-    public String getPersonInCharge() {
-        return personInCharge;
-    }
-
-    public void setPersonInCharge(String personInCharge) {
-        this.personInCharge = personInCharge;
-    }
-
     public Plan getBelongPlan() {
         return belongPlan;
     }
@@ -134,5 +129,36 @@ public class Card {
     public void setBelongPlan(Plan belongPlan) {
         this.belongPlan = belongPlan;
     }
-//>>>>>>> Stashed changes
+
+    public int getNumber() {
+        return number;
+    }
+
+    public void setNumber(int number) {
+        this.number = number;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public long getPersonInChargeId() {
+        return personInChargeId;
+    }
+
+    public void setPersonInChargeId(long personInChargeId) {
+        this.personInChargeId = personInChargeId;
+    }
+
+    public long getPersonCreateId() {
+        return personCreateId;
+    }
+
+    public void setPersonCreateId(long personCreateId) {
+        this.personCreateId = personCreateId;
+    }
 }
