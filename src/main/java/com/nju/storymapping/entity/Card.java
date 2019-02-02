@@ -82,6 +82,8 @@ public class Card {
     @ManyToOne
     private Plan belongPlan; //所属计划
 
+    private String planTitle; //计划名称
+
     public Date getDate() {
         return date;
     }
@@ -160,5 +162,13 @@ public class Card {
 
     public void setPersonCreateId(long personCreateId) {
         this.personCreateId = personCreateId;
+    }
+
+    public String getPlanTitle() {
+        return planTitle;
+    }
+
+    public void setPlanTitle(String planTitle) {
+        this.planTitle = planTitle;
     }
 }

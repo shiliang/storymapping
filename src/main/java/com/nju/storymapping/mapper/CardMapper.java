@@ -13,8 +13,9 @@ import java.util.ArrayList;
 @Mapper
 public interface CardMapper {
 
-    @Select("SELECT * FROM card WHERE person_in_charge_id = #{userId}")
+    @Select("SELECT a.*,b.title as planTitle  FROM card a left JOIN plan b " +
+            "ON a.belong_plan_id = b.id WHERE a.person_in_charge_id = #{userId}")
     @Results({@Result(property = "personInChargeId", column = "person_in_charge_id"),
     @Result(property = "personCreateId", column = "person_create_id")})
-    public ArrayList<Card> getCardIncharge(long userId);
+    ArrayList<Card> getCardIncharge(long userId);
 }
