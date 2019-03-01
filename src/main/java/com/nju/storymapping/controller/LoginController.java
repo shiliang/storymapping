@@ -6,18 +6,25 @@ package com.nju.storymapping.controller;/*
  * */
 
 import com.nju.storymapping.entity.User;
+import com.nju.storymapping.service.LoginTicketService;
 import com.nju.storymapping.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.DigestUtils;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletResponse;
 import java.util.HashMap;
+import java.util.UUID;
 
 @RestController
 public class LoginController {
     @Autowired
     UserService userService;
+
+    @Autowired
+    LoginTicketService loginTicketService;
 
     @RequestMapping("/")
     public String index() {
@@ -28,11 +35,15 @@ public class LoginController {
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     @ResponseBody
     public HashMap<String, Object> loginHandle(@RequestParam(value = "username") String userName,
-                        @RequestParam(value = "password") String passWord) {
+                        @RequestParam(value = "password") String passWord,
+                                               HttpServletResponse response) {
         HashMap<String, Object> map = new HashMap<String, Object>();
+
         User user = userService.getUserByName(userName);
-//        String hashPass = DigestUtils.md5DigestAsHex(passWord.getBytes());
-        String hashPass = passWord;
+
+        String saltPassword = passWord + user.getSalt();
+
+        String hashPass = DigestUtils.md5DigestAsHex(saltPassword.getBytes());
         if (user.getUsername().isEmpty()) {
             map.put("error", "用户名不存在");
             return map;
@@ -41,13 +52,23 @@ public class LoginController {
             map.put("error", "密码错误");
             return map;
         } else {
+            //String ticket = loginTicketService.getTicketByUserId(user.getId());
+            String ticket = userService.addLoginTicket(user.getId());
+
+            Cookie cookie = new Cookie("ticket", ticket);
+            cookie.setPath("/");
+            cookie.setMaxAge(3600*24*5);
+            response.addCookie(cookie);
             map.put("success",user.getId());
+
             map.put("token", "admin");
             map.put("project_id", "1");
-            return map;
         }
 
+            return map;
     }
+
+
     @RequestMapping(value = "/userinfo", method = RequestMethod.GET)
     public HashMap<String, Object> getInfo(@RequestParam(value = "token") String token) {
         HashMap<String, Object> userInfo = new HashMap<String, Object>();
@@ -70,7 +91,8 @@ public class LoginController {
     @RequestMapping(value = "/register", method = RequestMethod.POST)
     @ResponseBody
     public HashMap<String, Object> registerHandle(@RequestParam(value = "username") String userName,
-                                            @RequestParam(value = "password") String passWord){
+                                                  @RequestParam(value = "password") String passWord,
+                                                  HttpServletResponse response){
         HashMap<String, Object> map = new HashMap<String, Object>();
         User user = userService.getUserByName(userName);
 
@@ -81,12 +103,18 @@ public class LoginController {
 
         user = new User();
         user.setUsername(userName);
-        String hashPass = DigestUtils.md5DigestAsHex(passWord.getBytes());
+        String salt = UUID.randomUUID().toString().substring(0,5);
+        user.setSalt(salt);
+        String saltPassword = passWord + salt;
+        String hashPass = DigestUtils.md5DigestAsHex(saltPassword.getBytes());
         user.setPassword(hashPass);
-        int userId = userService.addUser(user);
-        String id = Integer.toString(userId);
+        User user1 = userService.addUser(user);
+        String ticket = userService.addLoginTicket(user1.getId());
+        Cookie cookie = new Cookie("ticket", ticket);
+        cookie.setPath("/");
+        response.addCookie(cookie);
         //返回给前台跳转到个人主页
-        map.put("id",id);
+        map.put("userId",user1.getId());
         return map;
 
     }

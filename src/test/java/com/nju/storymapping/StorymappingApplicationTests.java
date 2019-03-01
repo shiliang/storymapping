@@ -1,6 +1,6 @@
 package com.nju.storymapping;
 
-import com.nju.storymapping.utility.constant.Status;
+import com.nju.storymapping.utility.Status;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;

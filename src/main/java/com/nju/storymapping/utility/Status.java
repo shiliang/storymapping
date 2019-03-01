@@ -1,4 +1,4 @@
-package com.nju.storymapping.utility.constant;
+package com.nju.storymapping.utility;
 
 public enum Status {
     NEW("新建",1),

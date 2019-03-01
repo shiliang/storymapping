@@ -6,12 +6,12 @@ import org.springframework.stereotype.Service;
 import java.util.HashMap;
 
 
-@Service
 public interface UserService {
     HashMap<String, String> register(String username, String password);
     User getUserById(int id);
     User getUserByName(String name);
-    int addUser(User user);
+    User addUser(User user);
+    String addLoginTicket(long userId);
 
 
 }

@@ -28,6 +28,9 @@ public class User {
     @Column(name = "email")
     private String email;
 
+    @Column(name = "salt")
+    private String salt;
+
     public String getAvatar() {
         return avatar;
     }
@@ -68,5 +71,11 @@ public class User {
         this.password = password;
     }
 
+    public String getSalt() {
+        return salt;
+    }
 
+    public void setSalt(String salt) {
+        this.salt = salt;
+    }
 }
