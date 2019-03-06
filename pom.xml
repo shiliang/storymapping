@@ -62,6 +62,14 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>repackage</goal>
+                        </goals>
+                    </execution>
+                </executions>
+
             </plugin>
             <!-- Docker maven plugin -->
             <plugin>
@@ -79,6 +87,7 @@
                         </resource>
                     </resources>
                 </configuration>
+
             </plugin>
             <!-- Docker maven plugin -->
         </plugins>
